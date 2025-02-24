@@ -4,20 +4,23 @@ const cors = require("cors");
 const path = require("path");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
 
 // Serve script1.js and script.js from their current location
-app.use("/script1.js", express.static("C:/SHASHI/script1.js"));
-app.use("/script.js", express.static("C:/SHASHI/script.js"));
+app.use("/script1.js", express.static("C:\SHASHI\nav-backend\public\script.js"));
+app.use("/script.js", express.static("C:\SHASHI\nav-backend\public\script1.js"));
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://ayu:ayu@ayu.cawv7.mongodb.net/yourDatabaseName?retryWrites=true&w=majority&appName=ayu", {    
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect("mongodb+srv://ayu:ayu@ayu.cawv7.mongodb.net/yourDatabaseName?retryWrites=true&w=majority&appName=ayu")
+    .then(() => console.log("✅ Connected to MongoDB"))
+    .catch(err => console.error("❌ MongoDB Connection Error:", err));
+
 
 // Route-to-collection mapping
 const routeCollections = [
