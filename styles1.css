@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.button-container, .route-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+button, select {
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+    border: 2px solid black;
+}

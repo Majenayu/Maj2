@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Route Selection</title>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Toast Notification Styling */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .toast {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Different Notification Colors */
+        .success { background-color: green; }
+        .error { background-color: red; }
+        .info { background-color: blue; }
+    </style>
+</head>
+<body>
+
+<h2>Driver Route Selection</h2>
+<div class="controls">
+    <button id="enableLocation">Enable Location</button>
+    <button id="disableLocation">Disable Location</button>
+    <button id="userRouteBtn">Show User Route</button>
+    <button id="shareLocation">Share My Location</button>
+
+</div>
+<div class="controls">
+    <label for="startPoint">Start:</label>
+    <select id="startPoint">
+        <option value="12.9172,74.8560">🚌 Mangalore KSRTC</option>
+        <option value="12.9716,77.5946">🚌 Majestic, Bengaluru</option>
+        <option value="13.3409,74.7421">🚌 Udupi</option>
+        <option value="14.4530,75.9215">🚌 Shivamogga</option>
+        <option value="15.3647,75.1239">🚌 Hubli</option>
+        <option value="15.8497,74.4977">🚌 Belagavi</option>
+        <option value="12.2958,76.6394">🚌 Mysuru</option>
+    </select>
+    
+    <label for="endPoint">End:</label>
+    <select id="endPoint">
+        <option value="12.9172,74.8560">🚌 Mangalore KSRTC</option>
+        <option value="12.9716,77.5946">🚌 Majestic, Bengaluru</option>
+        <option value="13.3409,74.7421">🚌 Udupi</option>
+        <option value="14.4530,75.9215">🚌 Shivamogga</option>
+        <option value="15.3647,75.1239">🚌 Hubli</option>
+        <option value="15.8497,74.4977">🚌 Belagavi</option>
+        <option value="12.2958,76.6394">🚌 Mysuru</option>
+    </select>
+    <button id="routeBtn">Show Route</button>
+</div>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Transparent Table Overlay -->
+<div class="info-table">
+    <table>
+        <tr><td>⏳ Current Time:</td><td id="currentTime">--:--:--</td></tr>
+        <tr><td>📍 Distance to Destination:</td><td id="distance">-- km</td></tr>
+        <tr><td>🚗 Approximate Time:</td><td id="estimatedTime">-- min</td></tr>
+    </table>
+</div>
+
+<!-- Toast Notification Container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>

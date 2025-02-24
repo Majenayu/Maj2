@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Route Tracking</title>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+
+<h2>User Route Selection</h2>
+
+<!-- Dropdowns for Start and End Locations (Same as Driver Page) -->
+<div class="route-container">
+    <label for="start">Start: </label>
+    <select id="start">
+        <option value="12.9172,74.8560">🚌 Mangalore KSRTC</option>
+        <option value="12.9716,77.5946">🚌 Majestic, Bengaluru</option>
+        <option value="13.3409,74.7421">🚌 Udupi</option>
+        <option value="14.4530,75.9215">🚌 Shivamogga</option>
+        <option value="15.3647,75.1239">🚌 Hubli</option>
+        <option value="15.8497,74.4977">🚌 Belagavi</option>
+        <option value="12.2958,76.6394">🚌 Mysuru</option>
+    </select>
+
+    <label for="end">End: </label>
+    <select id="end">
+        <option value="12.9172,74.8560">🚌 Mangalore KSRTC</option>
+        <option value="12.9716,77.5946">🚌 Majestic, Bengaluru</option>
+        <option value="13.3409,74.7421">🚌 Udupi</option>
+        <option value="14.4530,75.9215">🚌 Shivamogga</option>
+        <option value="15.3647,75.1239">🚌 Hubli</option>
+        <option value="15.8497,74.4977">🚌 Belagavi</option>
+        <option value="12.2958,76.6394">🚌 Mysuru</option>
+    </select>
+
+    <button id="checkDriver">Find Driver</button>
+    <button id="selectFromMap">Select from Map</button>
+</div>
+
+<!-- Map Container -->
+<div id="map"></div>
+
+
+<!-- Table for Live Tracking Info -->
+<div id="infoTable">
+    <p>Current Time: <span id="currentTime"></span></p>
+    <p>Distance to Driver: <span id="distanceToDriver"></span> km</p>
+    <p>Estimated Arrival Time: <span id="ETA"></span></p>
+</div>
+
+<script type="module" src="script1.js"></script>
+
+</body>
+</html>
