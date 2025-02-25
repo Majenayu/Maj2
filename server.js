@@ -117,6 +117,10 @@ app.get("/get-driver-location", async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 });
+app.get("/", (req, res) => {
+    res.send("Backend is running!");
+});
+
 
 // Start the server
 app.listen(PORT, () => {
