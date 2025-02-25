@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to fetch the driver's live location
     async function fetchDriverLocation(startCoords, endCoords) {
         try {
-            let response = await fetch(`http://localhost:5000/get-driver-location?start=${JSON.stringify(startCoords)}&end=${JSON.stringify(endCoords)}`);
+           let response = await fetch(`https://maj-65qm.onrender.com/get-driver-location?start=${JSON.stringify(startCoords)}&end=${JSON.stringify(endCoords)}`);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
             let data = await response.json();
