@@ -130,7 +130,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let startCoords = document.getElementById("startPoint").value.split(",").map(Number);
         let endCoords = document.getElementById("endPoint").value.split(",").map(Number);
     
-        fetch("http://localhost:5000/update-location", {
+        fetch("https://maj-65qm.onrender.com/update-location", {
+
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
