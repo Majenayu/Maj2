@@ -44,7 +44,7 @@ h2 {
 
 /* Dropdown and Route Button Section */
 .controls select, .controls button {
-    margin:10px;
+    margin: 10px;
 }
 
 /* Map Styling */
@@ -59,7 +59,7 @@ h2 {
 .info-table {
     position: absolute;
     top: 250px;
-    left: 35px;
+    left: 35px; /* Default position for PC */
     background: rgba(6, 0, 6, 0.6);
     padding: 35px;
     border-radius: 19px;
@@ -97,7 +97,7 @@ h2 {
 #gpsLocator {
     position: absolute;
     bottom: 100px;
-    left: 150px;
+    left: 150px; /* Default position for PC */
     width: 45px;
     height: 45px;
     background: rgb(13, 0, 0);
@@ -120,7 +120,7 @@ h2 {
 /* Zoom In & Zoom Out Buttons */
 #zoomIn, #zoomOut {
     position: absolute;
-    left: 150px;
+    left: 150px; /* Default position for PC */
     width: 45px;
     height: 45px;
     background: rgb(12, 1, 1);
@@ -151,10 +151,30 @@ h2 {
 #zoomIn:hover {
     background: #020ef7;
 }
+
+/* Input Fields (Dropdowns) */
 #start, #end {
     font-size: 18px;  /* Increase text size */
     padding: 10px;    /* Add padding for better appearance */
     width: 200px;     /* Set width */
     height: 40px;     /* Adjust height */
     border-radius: 5px; /* Optional: Rounded corners */
+}
+
+/* Mobile-Specific Adjustments */
+@media screen and (max-width: 768px) {
+    /* Move the info-table and GPS button to the left */
+    .info-table {
+        left: 0px; /* Move table to the left side */
+        padding: 15px; /* Adjust padding for mobile */
+        font-size: 12px; /* Reduce font size */
+    }
+
+    #gpsLocator {
+        left: 0px; /* Move GPS button to the left side */
+    }
+
+    #zoomIn, #zoomOut {
+        left: 0px; /* Move zoom buttons to the left side */
+    }
 }
