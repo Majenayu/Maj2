@@ -1,24 +1,160 @@
+/* Apply a blurry background */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.5) url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    backdrop-filter: blur(8px);
     text-align: center;
+    color: white;
 }
 
-.button-container, .route-container {
+/* Heading Styles */
+h2 {
+    margin-top: 25px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+/* Button Styles */
+.controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Align buttons below heading */
+.controls {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    margin-top: 0px;
 }
 
-button, select {
-    padding: 8px;
-    font-size: 16px;
-    cursor: pointer;
+/* Dropdown and Route Button Section */
+.controls select, .controls button {
+    margin:10px;
 }
 
+/* Map Styling */
 #map {
     width: 100%;
-    height: 500px;
-    margin-top: 10px;
-    border: 2px solid black;
+    height: 600px;
+    margin: 0px auto;
+    border-radius: 10px;
+}
+
+/* Transparent Table Overlay */
+.info-table {
+    position: absolute;
+    top: 250px;
+    left: 35px;
+    background: rgba(6, 0, 6, 0.6);
+    padding: 35px;
+    border-radius: 19px;
+    color: white;
+    font-size: 17px;
+}
+
+/* Toast Notification Styling */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.success { background-color: green; }
+.error { background-color: red; }
+.info { background-color: blue; }
+
+/* GPS Locator Button */
+#gpsLocator {
+    position: absolute;
+    bottom: 100px;
+    left: 150px;
+    width: 45px;
+    height: 45px;
+    background: rgb(13, 0, 0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(167, 45, 45, 0.2);
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
+
+#gpsLocator:hover {
+    background: #452fd4;
+}
+
+/* Zoom In & Zoom Out Buttons */
+#zoomIn, #zoomOut {
+    position: absolute;
+    left: 150px;
+    width: 45px;
+    height: 45px;
+    background: rgb(12, 1, 1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgb(71, 7, 18);
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
+
+#zoomIn {
+    bottom: 230px; /* Position above the GPS button */
+}
+
+#zoomOut {
+    bottom: 170px; /* Position above the Zoom In button */
+}
+
+#zoomOut:hover {
+    background: #ff0000;
+}
+
+#zoomIn:hover {
+    background: #020ef7;
+}
+#start, #end {
+    font-size: 18px;  /* Increase text size */
+    padding: 10px;    /* Add padding for better appearance */
+    width: 200px;     /* Set width */
+    height: 40px;     /* Adjust height */
+    border-radius: 5px; /* Optional: Rounded corners */
 }
