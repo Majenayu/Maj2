@@ -14,10 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let driverLocation = null;
     let selectedLocation = null;
 
-    // Function to fetch the driver's live location
     async function fetchDriverLocation(startCoords, endCoords) {
         try {
-           let response = await fetch(`https://maj-65qm.onrender.com/get-driver-location?start=${JSON.stringify(startCoords)}&end=${JSON.stringify(endCoords)}`);
+            let response = await fetch(`https://maj-65qm.onrender.com/get-driver-location?start=${JSON.stringify(startCoords)}&end=${JSON.stringify(endCoords)}`);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
             let data = await response.json();
@@ -37,17 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Function to update the driver's location on the map
     function updateDriverLocation(lat, lng) {
         if (driverMarker) map.removeObject(driverMarker);
         driverMarker = new H.map.Marker({ lat, lng });
         map.addObject(driverMarker);
     }
 
-    // Function to calculate and display the route from driver to selected location
     function calculateRoute(start, end) {
         if (!start || !end) {
-            alert("Error: Missing driver location or destination!");
+            showToast("Error: Missing driver location or destination!", "error");
             return;
         }
 
@@ -55,8 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let routeParams = {
             routingMode: 'fast',
             transportMode: 'car',
-            origin: `${start.lat},${start.lng}`,  // Driver's live location
-            destination: `${end.lat},${end.lng}`, // Selected location on map
+            origin: `${start.lat},${start.lng}`,
+            destination: `${end.lat},${end.lng}`,
             return: 'polyline,summary'
         };
 
@@ -95,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Event Listener: Select destination from map
+    // ✅ Selecting Location on Map
     map.addEventListener('tap', function (evt) {
         let coord = map.screenToGeo(evt.currentPointer.viewportX, evt.currentPointer.viewportY);
         selectedLocation = { lat: coord.lat, lng: coord.lng };
@@ -107,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(`Location Selected: ${selectedLocation.lat}, ${selectedLocation.lng}`);
     });
 
-    // Event Listener: Find driver and generate route
+    // ✅ Checking for Driver & Route Calculation
     document.getElementById("checkDriver").addEventListener("click", async function () {
         let startSelect = document.getElementById("start");
         let endSelect = document.getElementById("end");
@@ -127,13 +124,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let driverFound = await fetchDriverLocation(startCoords, endCoords);
         if (!driverFound) {
-            alert("No active driver found.");
+            showToast("No active driver found.", "info");
             return;
         }
 
-        // Now generate the route from driver to the selected map location
         alert(`Generating route from Driver (${driverLocation.lat}, ${driverLocation.lng}) to Selected Location (${selectedLocation.lat}, ${selectedLocation.lng})`);
         calculateRoute(driverLocation, selectedLocation);
     });
+
+    // ✅ Toast Message Function
+    function showToast(message, type) {
+        let toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.className = 'toast-container';
+            document.body.appendChild(toastContainer);
+        }
+
+        let toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+
+        toastContainer.appendChild(toast);
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 500);
+        }, 3000);
+    }
+
+    // ✅ GPS Locator - Uses Selected Location from Map
+    document.getElementById("gpsLocator").addEventListener("click", function () {
+        if (!selectedLocation) {
+            alert("Please select a location on the map first.");
+            return;
+        }
+
+        // Center the map on the selected location
+        map.setCenter({ lat: selectedLocation.lat, lng: selectedLocation.lng });
+        map.setZoom(15); // Adjust zoom level if needed
+    });
+
+    // ✅ Zoom Controls
+    document.getElementById("zoomIn").addEventListener("click", function () {
+        let currentZoom = map.getZoom();
+        map.setZoom(currentZoom + 1);
+    });
+
+    document.getElementById("zoomOut").addEventListener("click", function () {
+        let currentZoom = map.getZoom();
+        map.setZoom(currentZoom - 1);
+    });
+
+    // ✅ Current Time Updater
+    function updateCurrentTime() {
+        let now = new Date();
+        let formattedTime = now.toLocaleTimeString();
+        document.getElementById("currentTime").innerText = formattedTime;
+    }
+
+    setInterval(updateCurrentTime, 1000);
+    updateCurrentTime();  // Call immediately to set initial time
 
 });
