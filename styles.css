@@ -17,7 +17,7 @@ h2 {
     font-weight: bold;
 }
 
-/* Button Styles (same as Driver/User buttons) */
+/* Button Styles */
 .controls button {
     background-color: #007bff;
     color: white;
@@ -59,7 +59,7 @@ h2 {
 .info-table {
     position: absolute;
     top: 250px;
-    left: 35px;
+    left: 35px; /* Default for PC */
     background: rgba(6, 0, 6, 0.6);
     padding: 35px;
     border-radius: 19px;
@@ -92,21 +92,23 @@ h2 {
 .success { background-color: green; }
 .error { background-color: red; }
 .info { background-color: blue; }
+
+/* GPS Locator Button */
 #gpsLocator {
     position: absolute;
     bottom: 1px;
-    left: 150px;
+    left: 150px; /* Default for PC */
     width: 45px;
     height: 45px;
     background: rgb(13, 0, 0);
-    border-radius: 5000%;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0px 4px 6px rgba(167, 45, 45, 0.2);
     cursor: pointer;
     border: none;
-    font-size: 20px; /* Adjust size if needed */
+    font-size: 20px;
     transition: background 0.3s ease;
     z-index: 1000;
 }
@@ -114,9 +116,11 @@ h2 {
 #gpsLocator:hover {
     background: #452fd4;
 }
+
+/* Zoom In & Zoom Out Buttons */
 #zoomIn, #zoomOut {
     position: absolute;
-    left: 150px;
+    left: 150px; /* Default for PC */
     width: 45px;
     height: 45px;
     background: rgb(12, 1, 1);
@@ -133,17 +137,35 @@ h2 {
 }
 
 #zoomIn {
-    bottom: 130px; /* Position above the GPS button */
+    bottom: 130px; /* Position above GPS button */
 }
 
 #zoomOut {
-    bottom: 70px; /* Position above the Zoom In button */
+    bottom: 70px; /* Position above Zoom In button */
 }
 
- #zoomOut:hover {
+#zoomOut:hover {
     background: #ff0000;
 }
+
 #zoomIn:hover {
     background: #020ef7;
 }
 
+/* Mobile-Specific Adjustments */
+@media screen and (max-width: 768px) {
+    /* Move the info-table and GPS button to the left */
+    .info-table {
+        left: 10px; /* Move table to the left for better mobile view */
+        padding: 20px; /* Adjust padding */
+        font-size: 14px; /* Reduce font size */
+    }
+
+    #gpsLocator {
+        left: 10px; /* Move GPS button to the left */
+    }
+
+    #zoomIn, #zoomOut {
+        left: 10px; /* Move zoom buttons to the left */
+    }
+}
