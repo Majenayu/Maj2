@@ -173,6 +173,33 @@ document.addEventListener("DOMContentLoaded", function () {
         
        
     });
+    
+    let idleTimer = null;
+
+    function zoomToUserLocation() {
+        if (userLocation) {
+            map.setCenter(userLocation);
+            map.setZoom(15); // Adjust zoom level as needed
+        } else {
+            showToast("❌ Location not available.", "error");
+        }
+    }
+    
+    // Reset idle timer on user interaction
+    function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(zoomToUserLocation, 10000); // Auto-zoom after 10 sec of inactivity
+    }
+    
+    // Detect user activity
+    map.addEventListener("pointerdown", resetIdleTimer);
+    map.addEventListener("wheel", resetIdleTimer);
+    map.addEventListener("touchstart", resetIdleTimer);
+    map.addEventListener("dragstart", resetIdleTimer);
+    
+    // Manual button click
+    document.getElementById("gpsLocator").addEventListener("click", zoomToUserLocation);
+    
 
     
 });
