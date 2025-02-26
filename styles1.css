@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background:rgba(30, 36, 40, 1)  url('background.jpg') no-repeat center center fixed;
+    background:rgba(62, 74, 91, 0.69)  url('background.jpg') no-repeat center center fixed;
     background-size: cover;
     backdrop-filter: blur(8px);
     text-align: center;
