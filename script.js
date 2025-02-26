@@ -11,29 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let ui = H.ui.UI.createDefault(map, defaultLayers);
     let router = platform.getRoutingService(null, 8);
 
-    let blueRoute, userLocationMarker;
+    let blueRoute, yellowRoute, userLocationMarker;
     let userLocation = null;
     let trackingWatcher = null;
-    document.getElementById("shareLocation").addEventListener("click", function () {
-        if (!navigator.geolocation) {
-            showToast("❌ Geolocation not supported.", "error");
-            return;
-        }
     
-        navigator.geolocation.watchPosition(
-            (position) => {
-                let lat = position.coords.latitude;
-                let lng = position.coords.longitude;
-                sendDriverLocationToServer(lat, lng);
-            },
-            (error) => {
-                showToast("❌ Failed to access location.", "error");
-            },
-            { enableHighAccuracy: true }
-        );
-    
-        showToast("✅ Sharing location started!", "success");
-    });
     
 
     function showToast(message, type) {
@@ -58,16 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         map.addObject(userLocationMarker);
     }
 
-    function updateUserRoute() {
-        if (!userLocation) {
-            showToast("❌ Cannot find user location.", "error");
-            return;
-        }
-        let end = document.getElementById("endPoint").value.split(",");
-        let userStart = [userLocation.lat, userLocation.lng];
-        calculateRoute(userStart, end, 'blue', true);
-    }
-
+    
     function updateTable(distance, duration) {
         document.getElementById("distance").innerText = distance.toFixed(2) + " km";
         document.getElementById("estimatedTime").innerText = Math.round(duration) + " min";
@@ -84,12 +56,32 @@ document.addEventListener("DOMContentLoaded", function () {
             showToast("❌ Geolocation not supported.", "error");
             return;
         }
+    
+        navigator.geolocation.watchPosition(
+            (position) => {
+                let lat = position.coords.latitude;
+                let lng = position.coords.longitude;
+                sendDriverLocationToServer(lat, lng);
+            },
+            (error) => {
+                showToast("❌ Failed to access location.", "error");
+            },
+            { enableHighAccuracy: true }
+        );
+    
+        showToast("✅ Sharing location started!", "success");
+
+        if (!navigator.geolocation) {
+            showToast("❌ Geolocation not supported.", "error");
+            return;
+        }
         trackingWatcher = navigator.geolocation.watchPosition(updateUserLocation, function () {
             showToast("❌ Failed to access location.", "error");
         }, { enableHighAccuracy: true });
         showToast("✅ Location enabled!", "success");
         document.getElementById("userRouteBtn").style.display = "block";
     });
+  
 
     document.getElementById("disableLocation").addEventListener("click", function () {
         if (trackingWatcher) navigator.geolocation.clearWatch(trackingWatcher);
@@ -108,24 +100,35 @@ document.addEventListener("DOMContentLoaded", function () {
             'destination': `${end[0]},${end[1]}`,
             'return': 'polyline,summary'
         };
+        
         router.calculateRoute(routingParams, (result) => {
             if (result.routes.length === 0) {
                 showToast("❌ No route found.", "error");
                 return;
             }
+            
             let routeShape = result.routes[0].sections[0].polyline;
             let routePoints = H.geo.LineString.fromFlexiblePolyline(routeShape);
             let newRoute = new H.map.Polyline(routePoints, { style: { strokeColor: color, lineWidth: 5 } });
+    
             if (isUserRoute) {
+                // ✅ Remove old blue route before adding a new one
                 blueRoute = removePreviousRoute(blueRoute);
                 blueRoute = newRoute;
+    
                 let summary = result.routes[0].sections[0].summary;
                 updateTable(summary.length / 1000, summary.duration / 60);
+            } else {
+                // ✅ Remove old yellow route before adding a new one
+                yellowRoute = removePreviousRoute(yellowRoute);
+                yellowRoute = newRoute;
             }
+    
             map.addObject(newRoute);
             map.getViewModel().setLookAtData({ bounds: newRoute.getBoundingBox() });
         }, () => showToast("❌ Failed to generate route.", "error"));
     }
+    
     function sendDriverLocationToServer(lat, lng) {
         let startCoords = document.getElementById("startPoint").value.split(",").map(Number);
         let endCoords = document.getElementById("endPoint").value.split(",").map(Number);
@@ -150,15 +153,26 @@ document.addEventListener("DOMContentLoaded", function () {
             showToast("❌ Failed to update driver location.", "error");
         });
     }
+    function updateUserRoute() {
+        if (!userLocation) {
+            showToast("❌ Cannot find user location.", "error");
+            return;
+        }
+        let end = document.getElementById("endPoint").value.split(",");
+        let userStart = [userLocation.lat, userLocation.lng];
+        calculateRoute(userStart, end, 'blue', true);
+    }
+
     
 
     document.getElementById("routeBtn").addEventListener("click", function () {
         let startCoords = document.getElementById("startPoint").value.split(",").map(Number);
         let endCoords = document.getElementById("endPoint").value.split(",").map(Number);
+        updateUserRoute();
         calculateRoute(startCoords, endCoords, 'yellow', false);
+        
+       
     });
 
-    document.getElementById("userRouteBtn").addEventListener("click", function () {
-        updateUserRoute();
-    });
+    
 });
