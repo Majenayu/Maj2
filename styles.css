@@ -7,54 +7,63 @@ body {
     background-size: cover;
     backdrop-filter: blur(8px);
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 /* Heading Styles */
 h2 {
-    margin-top: 20px;
+    margin-top: 70px;
     font-size: 28px;
     font-weight: bold;
 }
 
-/* Button Styles */
-.controls button {
+/* Controls Section */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Route Selection Container */
+.route-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Dropdown Styling */
+#start, #end {
+    font-size: 14px;
+    padding: 6px;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+/* Show Route Button */
+#showRoute {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 8px 15px; /* Reduced padding */
-    margin: 5px;
-    font-size: 16px; /* Reduced font size */
+    padding: 8px 15px;
+    font-size: 16px;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
 }
 
-.controls button:hover {
-    background-color: #0056b3;
-}
-
-/* Align buttons below heading */
-.controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-}
-
-/* Dropdown and Route Button Section */
-.controls select {
-    margin: 5px;
-    padding: 8px; /* Reduce padding */
-    font-size: 14px; /* Reduce font size */
+#showRoute:hover {
+    background-color: #a0abb7;
 }
 
 /* Map Styling */
 #map {
     width: 100%;
-    height: 500px;
-    margin: 20px auto;
+    height: 600px;
+    margin: 10px auto;
     border-radius: 10px;
 }
 
@@ -62,12 +71,12 @@ h2 {
 .info-table {
     position: absolute;
     top: 250px;
-    left: 35px; /* Default for PC */
+    left: 35px;
     background: rgba(6, 0, 6, 0.6);
-    padding: 25px; /* Reduced padding */
+    padding: 25px;
     border-radius: 15px;
     color: white;
-    font-size: 15px; /* Reduced font size */
+    font-size: 15px;
 }
 
 /* Toast Notification Styling */
@@ -79,7 +88,7 @@ h2 {
 }
 
 .toast {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(132, 4, 4, 0.8);
     color: white;
     padding: 15px 20px;
     border-radius: 5px;
@@ -100,18 +109,18 @@ h2 {
 #gpsLocator {
     position: absolute;
     bottom: 1px;
-    left: 150px; /* Default for PC */
-    width: 40px; /* Reduced size */
+    left: 150px;
+    width: 40px;
     height: 40px;
-    background: rgb(13, 0, 0);
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 6px rgba(167, 45, 45, 0.2);
+    box-shadow: 0px 4px 6px rgb(255, 255, 255);
     cursor: pointer;
     border: none;
-    font-size: 18px; /* Reduced font size */
+    font-size: 18px;
     transition: background 0.3s ease;
     z-index: 1000;
 }
@@ -123,10 +132,10 @@ h2 {
 /* Zoom In & Zoom Out Buttons */
 #zoomIn, #zoomOut {
     position: absolute;
-    left: 150px; /* Default for PC */
-    width: 40px; /* Reduced size */
-    height: 40px;
-    background: rgb(12, 1, 1);
+    left: 150px;
+    width: 45px;
+    height: 45px;
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -134,17 +143,17 @@ h2 {
     box-shadow: 0px 4px 6px rgb(71, 7, 18);
     cursor: pointer;
     border: none;
-    font-size: 18px; /* Reduced font size */
+    font-size: 18px;
     transition: background 0.3s ease;
     z-index: 1000;
 }
 
 #zoomIn {
-    bottom: 120px; /* Adjusted position */
+    bottom: 130px;
 }
 
 #zoomOut {
-    bottom: 60px; /* Adjusted position */
+    bottom: 70px;
 }
 
 #zoomOut:hover {
@@ -157,35 +166,54 @@ h2 {
 
 /* Mobile-Specific Adjustments */
 @media screen and (max-width: 768px) {
-    /* Move the info-table and GPS button to the left */
+    .route-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #start, #end {
+        font-size: 12px;
+        padding: 5px;
+        width: 120px;
+        height: 30px;
+    }
+
+    /* Move "Show Route" button below */
+    #showRoute {
+        margin-top: 5px;
+        width: 13px;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    /* Adjust info-table and GPS button */
     .info-table {
-        left: 10px; /* Move table to the left for better mobile view */
-        padding: 15px; /* Adjust padding */
-        font-size: 13px; /* Reduce font size */
+        left: 10px;
+        padding: 15px;
+        font-size: 13px;
     }
 
     #gpsLocator {
-        left: 10px; /* Move GPS button to the left */
-        width: 35px; /* Reduce size */
+        left: 10px;
+        width: 35px;
         height: 35px;
         font-size: 16px;
     }
 
     #zoomIn, #zoomOut {
-        left: 10px; /* Move zoom buttons to the left */
-        width: 35px; /* Reduce size */
+        left: 10px;
+        width: 35px;
         height: 35px;
         font-size: 16px;
     }
 
-    /* Reduce dropdown & button sizes */
     .controls select {
-        padding: 6px;
+        padding: 8px;
         font-size: 12px;
     }
 
     .controls button {
-        padding: 6px 12px;
+        padding: 6px 0px;
         font-size: 14px;
     }
 }
