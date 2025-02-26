@@ -14,7 +14,7 @@
 
 <h2>User Route Selection</h2>
 
-<!-- Dropdowns for Start and End Locations (Same as Driver Page) -->
+<!-- Dropdowns for Start and End Locations -->
 <div class="route-container">
     <label for="start">Start: </label>
     <select id="start">
@@ -37,21 +37,32 @@
         <option value="15.8497,74.4977">🚌 Belagavi</option>
         <option value="12.2958,76.6394">🚌 Mysuru</option>
     </select>
+</div>
 
+<!-- Action Buttons -->
+<div class="controls">
     <button id="checkDriver">Find Driver</button>
     <button id="selectFromMap">Select from Map</button>
+    <button id="gpsLocator">⬤</button> 
+    <button id="zoomIn">+</button>
+    <button id="zoomOut">−</button>
 </div>
 
 <!-- Map Container -->
 <div id="map"></div>
 
-
-<!-- Table for Live Tracking Info -->
-<div id="infoTable">
-    <p>Current Time: <span id="currentTime"></span></p>
-    <p>Distance to Driver: <span id="distanceToDriver"></span> km</p>
-    <p>Estimated Arrival Time: <span id="ETA"></span></p>
+<!-- Transparent Table for Live Tracking -->
+<div class="info-table">
+    <table>
+        <tr><td>⏳ Current Time:</td><td id="currentTime">--:--:--</td></tr>
+        <tr><td>📍 Distance to Driver:</td><td id="distanceToDriver">-- km</td></tr>
+        <tr><td>🚗 Estimated Time of Arrival (ETA):</td><td id="ETA">-- min</td></tr>
+    </table>
 </div>
+
+<!-- Toast Notification Container -->
+<div id="toastContainer" class="toast-container"></div>
+
 
 <script type="module" src="script1.js"></script>
 
