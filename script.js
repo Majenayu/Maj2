@@ -200,6 +200,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // Manual button click
     document.getElementById("gpsLocator").addEventListener("click", zoomToUserLocation);
     
-
+    document.getElementById("zoomIn").addEventListener("click", function () {
+        let currentZoom = map.getZoom();
+        map.setZoom(currentZoom + 1);
+    });
+    
+    document.getElementById("zoomOut").addEventListener("click", function () {
+        let currentZoom = map.getZoom();
+        map.setZoom(currentZoom - 1);
+    });
+    
     
 });
