@@ -1,24 +1,94 @@
+/* Apply a blurry background */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.5) url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    backdrop-filter: blur(8px);
     text-align: center;
+    color: white;
 }
 
-.button-container, .route-container {
+/* Heading Styles */
+h2 {
+    margin-top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Button Styles (same as Driver/User buttons) */
+.controls button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Align buttons below heading */
+.controls {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
-button, select {
-    padding: 8px;
-    font-size: 16px;
-    cursor: pointer;
+/* Dropdown and Route Button Section */
+.controls select, .controls button {
+    margin: 10px;
 }
 
+/* Map Styling */
 #map {
-    width: 100%;
+    width: 80%;
     height: 500px;
-    margin-top: 10px;
-    border: 2px solid black;
+    margin: 20px auto;
+    border-radius: 10px;
 }
+
+/* Transparent Table Overlay */
+.info-table {
+    position: absolute;
+    top: 250px;
+    left: 385px;
+    background: rgba(6, 0, 6, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Toast Notification Styling */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.success { background-color: green; }
+.error { background-color: red; }
+.info { background-color: blue; }
