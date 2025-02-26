@@ -114,3 +114,36 @@ h2 {
 #gpsLocator:hover {
     background: #452fd4;
 }
+#zoomIn, #zoomOut {
+    position: absolute;
+    left: 150px;
+    width: 45px;
+    height: 45px;
+    background: rgb(12, 1, 1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgb(71, 7, 18);
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
+
+#zoomIn {
+    bottom: 130px; /* Position above the GPS button */
+}
+
+#zoomOut {
+    bottom: 70px; /* Position above the Zoom In button */
+}
+
+ #zoomOut:hover {
+    background: #ff0000;
+}
+#zoomIn:hover {
+    background: #020ef7;
+}
+
