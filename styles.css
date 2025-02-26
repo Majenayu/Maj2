@@ -92,3 +92,25 @@ h2 {
 .success { background-color: green; }
 .error { background-color: red; }
 .info { background-color: blue; }
+#gpsLocator {
+    position: absolute;
+    bottom: 1px;
+    left: 75px;
+    width: 45px;
+    height: 45px;
+    background: rgb(13, 0, 0);
+    border-radius: 5000%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(167, 45, 45, 0.2);
+    cursor: pointer;
+    border: none;
+    font-size: 20px; /* Adjust size if needed */
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
+
+#gpsLocator:hover {
+    background: #452fd4;
+}
