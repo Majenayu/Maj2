@@ -1,0 +1,177 @@
+/* 🔥 Fullscreen Preloader with Color Transition */
+#preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background: linear-gradient(-45deg, #ff416c, #ff4b2b, #ff9a9e, #fad0c4);
+    background-size: 400% 400%;
+    animation: bgAnimation 6s infinite alternate ease-in-out;
+    transition: opacity 1s ease-out;
+}
+
+/* 🎨 Background Color Transition (Pink → Red) */
+@keyframes bgAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🎡 Loader Container (Keeps Everything Centered) */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* 🎡 Spinning Loader (Centered) */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+/* 🚀 "Loading..." Text (Centered) */
+.loader-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    animation: fadeText 1s infinite alternate;
+}
+
+/* 🔄 Text Fade Effect */
+@keyframes fadeText {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+}
+
+/* 🔄 Spinning Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ✨ "Welcome to Majen Navigation" Animation */
+.welcome-text {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid white;
+    width: 0;
+    margin-bottom: 20px;
+    animation: typewriter 3s steps(30, end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 360px; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+.button-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 20px; /* Adjust the space between buttons */
+}
+
+button {
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    min-width: 150px; /* Ensures buttons are of equal width */
+    text-align: center;
+}
+
+
+button:hover {
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    transform: scale(1.05);
+}
+/* Centering the quote above buttons */
+.quote-container {
+    position: fixed;
+    top: 35%; /* Adjusts the quote above buttons */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%; /* Keeps text centered */
+}
+
+#quote {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHJhdmVsJTIwYnVzfGVufDB8fDB8fHww') no-repeat center center/cover;
+    filter: blur(8px);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+
+
+
+
