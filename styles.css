@@ -12,7 +12,7 @@ body {
 
 /* Heading Styles */
 h2 {
-    margin-top: 50px;
+    margin-top: 70px;
     font-size: 28px;
     font-weight: bold;
 }
@@ -20,64 +20,28 @@ h2 {
 /* Controls Section */
 .controls {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    border-radius: 12px;
-    width: 95%;
-    max-width: 800px;
-    margin: 15px auto; /* Center the controls section */
-  }
-  /* Location Buttons (Enable & Disable) */
-.location-buttons {
-    display: flex;
     justify-content: center;
-    gap: 25px;
-    margin-bottom: 15px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-/* Route Selection */
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Route Selection Container */
 .route-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 15px;
-  }
-  
-  /* Dropdown Select */
-  select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s;
-    width: 220px;
-  }
-  
-  select:hover {
-    border-color: #007bff;
-  }
+    gap: 10px;
+}
+
+/* Dropdown Styling */
+#start, #end {
+    font-size: 14px;
+    padding: 6px;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+}
+
 /* Show Route Button */
 #showRoute {
     background-color: #007bff;
@@ -106,8 +70,8 @@ h2 {
 /* Transparent Table Overlay */
 .info-table {
     position: absolute;
-    top: 380px;
-    left: 10px;
+    top: 250px;
+    left: 35px;
     background: rgba(6, 0, 6, 0.6);
     padding: 25px;
     border-radius: 15px;
@@ -144,11 +108,11 @@ h2 {
 /* GPS Locator Button */
 #gpsLocator {
     position: absolute;
-    top: 860px;
+    bottom: 1px;
     left: 150px;
     width: 40px;
     height: 40px;
-    background: rgb(0, 0, 0);
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -171,7 +135,7 @@ h2 {
     left: 150px;
     width: 45px;
     height: 45px;
-    background: rgb(0, 0, 0);
+    background: rgb(255, 255, 255);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -185,7 +149,7 @@ h2 {
 }
 
 #zoomIn {
-    bottom: 120px;
+    bottom: 130px;
 }
 
 #zoomOut {
@@ -252,28 +216,4 @@ h2 {
         padding: 6px 0px;
         font-size: 14px;
     }
-    /* Route Selection */
-.route-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 15px;
-  }
-  
-  /* Dropdown Select */
-  select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 12px;
-    outline: none;
-    transition: all 0.3s;
-    width: 220px;
-  }
-  
-  select:hover {
-    border-color: #007bff;
-  }
 }
