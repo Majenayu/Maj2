@@ -70,59 +70,40 @@ function getRouteCollection(start, end) {
 }
 
 // API to update the driver's location
-app.post("/update-location", async (req, res) => {
+// API to update the driver's location
+app.post('/update-location', async (req, res) => {
+    const { start, end, lat, lng, passengerCount } = req.body;
+
+    // Validate required fields
+    if (!start || !end || lat === undefined || lng === undefined) {
+        return res.status(400).json({ success: false, message: "Missing required parameters (start, end, lat, lng)" });
+    }
+
+    const collection = getRouteCollection(start, end);
+    if (!collection) {
+        return res.status(404).json({ success: false, message: "Route not found" });
+    }
+
+    const routeId = `${start.join(",")}-${end.join(",")}`;
+    const updateData = {
+        location: { lat, lng },
+        updatedAt: new Date()
+    };
+
+    // Include passengerCount only if it's valid (number or string representing number)
+    if (passengerCount !== undefined && passengerCount !== null) {
+        updateData.passengerCount = passengerCount;
+    }
+
     try {
-        const { start, end, lat, lng } = req.body;
-        if (!start || !end || !lat || !lng) {
-            return res.status(400).json({ error: "Missing required parameters" });
-        }
-
-        // Get the appropriate MongoDB collection
-        const routeCollection = getRouteCollection(start, end);
-        if (!routeCollection) return res.status(404).json({ error: "Route not found" });
-
-        // Update the driver's location in the collection
-        await routeCollection.updateOne(
-            {},
-            { $set: { driverLocation: { lat, lng }, timestamp: new Date() } },
+        await collection.updateOne(
+            { _id: routeId },
+            { $set: updateData },
             { upsert: true }
         );
-
-        res.json({ message: "Driver location updated successfully" });
+        res.json({ success: true });
     } catch (error) {
         console.error("Error updating location:", error);
-        res.status(500).json({ error: "Server error" });
+        res.status(500).json({ success: false, message: "Internal Server Error" });
     }
-});
-
-// API to retrieve the driver's location
-app.get("/get-driver-location", async (req, res) => {
-    try {
-        const { start, end } = req.query;
-        if (!start || !end) {
-            return res.status(400).json({ error: "Missing start or end parameters" });
-        }
-
-        // Get the corresponding MongoDB collection
-        const routeCollection = getRouteCollection(JSON.parse(start), JSON.parse(end));
-        if (!routeCollection) return res.status(404).json({ error: "Route not found" });
-
-        // Retrieve the driver's latest location
-        const driverLocation = await routeCollection.findOne({}, { projection: { _id: 0 } });
-        if (!driverLocation) return res.status(404).json({ message: "No driver available on this route" });
-
-        res.json(driverLocation);
-    } catch (error) {
-        console.error("Error fetching driver location:", error);
-        res.status(500).json({ error: "Server error" });
-    }
-});
-app.get("/", (req, res) => {
-    res.send("Backend is running!");
-});
-
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
 });
